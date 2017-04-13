@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Movies - Home</title>
+
+</head>
+<body>
+    <h1>Movies</h1>
+    <a href="/add">Add a new movie</a>
+    {% for movie in movies%}
+        <h1>{{movie.name}}</h1>
+        <div style="font-size: 30px">{{'*' * movie.rating}}</div>
+        {{movie.image}}
+    {% endfor %}
+</body>
+</html>
