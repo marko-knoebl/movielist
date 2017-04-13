@@ -46,8 +46,25 @@ class AddHandler(BaseHandler):
         movie.put()
         return self.render_template('add-post.html')
 
+class DeleteHandler(BaseHandler):
+    def post(self, movie_id):
+        todelete = models.Movie.get_by_id(int(movie_id))
+        name = todelete.name
+        todelete.key.delete()
+        return self.render_template('del-post.html',
+                                    params={'name': name})
+
+class EditHandler(BaseHandler):
+    def post(self, movie_id):
+        toedit = models.Movie.get_by_id(int(movie_id))
+        rating = int(self.request.get('rating'))
+        toedit.rating = rating
+        toedit.put()
+        return self.render_template('edit-post.html')
 
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler),
     webapp2.Route('/add', AddHandler),
+    webapp2.Route('/delete/<movie_id:\d+>', DeleteHandler),
+    webapp2.Route('/edit/<movie_id:\d+>', EditHandler),
 ], debug=True)

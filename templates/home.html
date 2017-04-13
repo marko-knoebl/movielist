@@ -11,7 +11,14 @@
     {% for movie in movies%}
         <h1>{{movie.name}}</h1>
         <div style="font-size: 30px">{{'*' * movie.rating}}</div>
-        {{movie.image}}
+        <img src="{{movie.image}}" width="200px"><br>
+        <form method="post" action="/delete/{{movie.key.id()}}">
+            <button>Delete</button>
+        </form>
+        <form method="post" action="/edit/{{movie.key.id()}}">
+            <input type="number" name="rating">
+            <button>Rate</button>
+        </form>
     {% endfor %}
 </body>
 </html>
